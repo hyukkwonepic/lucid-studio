@@ -3,9 +3,20 @@ import { Styled } from './editor.styles';
 import UtilityBar from '../utility-bar/utility-bar';
 import ToolBar from '../toolbar/toolbar';
 import ObjectPanel from '../object-panel/object-panel';
+import { useEffect } from 'react';
 import Canvas from '../canvas/canvas';
 
 const Editor = () => {
+  useEffect(() => {
+    // REF: https://github.com/pixijs/pixi.js/issues/6414
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        e.preventDefault();
+      },
+      { passive: false },
+    );
+  }, []);
 
   return (
     <>
