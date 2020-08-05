@@ -3,6 +3,7 @@ export const theme = {
     mint: '#3EB489',
     grey: '#b3b3b3',
     white: '#ffffff',
+    charcoal: '#333333',
   },
   fonts: {
     lato: 'Lato, sans-serif',

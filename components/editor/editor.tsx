@@ -3,10 +3,14 @@ import { Styled } from './editor.styles';
 import UtilityBar from '../utility-bar/utility-bar';
 import ToolBar from '../toolbar/toolbar';
 import ObjectPanel from '../object-panel/object-panel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Canvas from '../canvas/canvas';
 
 const Editor = () => {
+  const [tempState, setTempState] = useState({
+    title: 'Untitled',
+  });
+
   useEffect(() => {
     // REF: https://github.com/pixijs/pixi.js/issues/6414
     window.addEventListener(
@@ -18,6 +22,13 @@ const Editor = () => {
     );
   }, []);
 
+  const handleTitleChange = (title) => {
+    setTempState({
+      ...tempState,
+      title,
+    });
+  };
+
   return (
     <>
       <Head>
@@ -25,7 +36,7 @@ const Editor = () => {
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"></link>
       </Head>
       <Styled.Editor>
-        <UtilityBar />
+        <UtilityBar title={tempState.title} onTitleChange={handleTitleChange} />
         <ToolBar />
         <ObjectPanel />
         <Canvas />
