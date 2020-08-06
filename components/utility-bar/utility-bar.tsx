@@ -1,10 +1,11 @@
 import { Styled } from './utility-bar.styles';
 import { FC, useState, useRef, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { fileNameState } from '../../recoil/atoms';
 
-const Title: FC<{
-  title: string;
-  onChange: (string) => void;
-}> = ({ title, onChange }) => {
+const Title: FC = () => {
+  const [title, setTitle] = useRecoilState(fileNameState);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [mode, setMode] = useState<'text' | 'edit'>('text');
@@ -21,7 +22,7 @@ const Title: FC<{
 
   const handleInputBlur = (e) => {
     if (e.target.value) {
-      onChange(e.target.value);
+      setTitle(e.target.value);
     }
     setMode('text');
   };
@@ -30,7 +31,7 @@ const Title: FC<{
     if (e.key === 'Enter' || e.key === 'Escape') {
       const target = e.target as EventTarget & HTMLInputElement;
       if (target.value) {
-        onChange(target.value);
+        setTitle(target.value);
       }
       setMode('text');
     }
@@ -55,15 +56,10 @@ const Title: FC<{
   );
 };
 
-type UtilityBarProps = {
-  title: string;
-  onTitleChange: (string) => void;
-};
-
-const UtilityBar: FC<UtilityBarProps> = ({ title, onTitleChange }) => {
+const UtilityBar: FC = () => {
   return (
     <Styled.UtilityBar>
-      <Title title={title} onChange={onTitleChange} />
+      <Title />
     </Styled.UtilityBar>
   );
 };
