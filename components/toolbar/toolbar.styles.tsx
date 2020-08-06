@@ -13,12 +13,37 @@ const Toolbar = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Tool = styled.div`
+const Tool = styled.div<{ active?: boolean }>`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 16px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+
+  ${(props) => {
+    return (
+      props.active &&
+      `
+      background-color: ${props.theme.colors.mint10};
+    `
+    );
+  }}
+
+  &:nth-child(1) {
+    margin-top: 8px;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.mint10};
+    border-radius: 10px;
+  }
 
   svg {
     width: 32px;

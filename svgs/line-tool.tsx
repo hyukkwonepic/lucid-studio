@@ -1,10 +1,11 @@
-const LineTool = (props: React.SVGProps<SVGSVGElement>) => {
+import { ToolIcon } from '../types';
+
+const LineTool: FC<ToolIcon> = ({ active, ...rest }) => {
+  const color = active ? '#3EB489' : '#999999';
+
   return (
-    <svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...props}>
-      <path
-        d="M6.098 25.898a.667.667 0 010-.943L24.954 6.1a.667.667 0 01.943.943L7.041 25.898a.667.667 0 01-.943 0z"
-        fill="#999999"
-      />
+    <svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...rest}>
+      <path d="M6.213 25.094l18.88-18.88a.15.15 0 01.212.212l-18.88 18.88a.15.15 0 11-.212-.212z" stroke={color} />
     </svg>
   );
 };

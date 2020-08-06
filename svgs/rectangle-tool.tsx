@@ -1,9 +1,14 @@
-const RectangleTool = (props: React.SVGProps<SVGSVGElement>) => {
+import { FC } from 'react';
+import { ToolIcon } from '../types';
+
+const RectangleTool: FC<ToolIcon> = ({ active, ...rest }) => {
+  const color = active ? '#3EB489' : '#999999';
   return (
-    <svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...props}>
+    <svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...rest}>
       <path
-        d="M8 6.5h16A1.5 1.5 0 0125.5 8v16a1.5 1.5 0 01-1.5 1.5H8A1.5 1.5 0 016.5 24V8A1.5 1.5 0 018 6.5z"
-        stroke="#999999"
+        d="M8 6.65h16c.746 0 1.35.604 1.35 1.35v16A1.35 1.35 0 0124 25.35H8A1.35 1.35 0 016.65 24V8c0-.746.604-1.35 1.35-1.35z"
+        stroke={color}
+        strokeWidth={1.3}
       />
     </svg>
   );
