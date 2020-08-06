@@ -6,7 +6,7 @@ const UtilityBar = styled.div`
   z-index: 2;
   top: 0;
   width: 100%;
-  height: 40px;
+  height: 48px;
   display: flex;
 `;
 
@@ -19,11 +19,12 @@ const Title = styled.div`
   span,
   input {
     width: 100%;
-    line-height: 40px;
+    line-height: 48px;
     text-align: center;
     display: block;
-    font-family: ${({ theme }) => theme.fonts.lato};
+    font-family: ${({ theme }) => theme.fonts.primary};
     font-weight: 400;
+    font-size: 16px;
     color: ${({ theme }) => theme.colors.charcoal};
   }
 `;

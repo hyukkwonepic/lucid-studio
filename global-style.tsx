@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
+    user-select: none;
     overscroll-behavior: none; /* https://www.smashingmagazine.com/2018/08/scroll-bouncing-websites/ */
   }
 

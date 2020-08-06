@@ -1,11 +1,13 @@
 export const theme = {
   colors: {
+    background: '#e5e5e5',
     mint: '#3EB489',
-    grey: '#b3b3b3',
+    mint10: '#ECF7F3',
+    grey: '#999999',
     white: '#ffffff',
-    charcoal: '#333333',
+    charcoal: '#999999',
   },
   fonts: {
-    lato: 'Lato, sans-serif',
+    primary: 'Lato, sans-serif',
   },
 };
