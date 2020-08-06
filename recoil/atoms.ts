@@ -11,3 +11,8 @@ export const toolState = atom<typeof Tools[keyof typeof Tools]>({
   key: 'toolState',
   default: Tools.move,
 });
+
+export const objectPanelViewState = atom<typeof ObjectPanelViews[keyof typeof ObjectPanelViews]>({
+  key: 'objectPanelViewState',
+  default: ObjectPanelViews.layers,
+});

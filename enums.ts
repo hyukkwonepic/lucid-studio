@@ -6,3 +6,8 @@ export enum Tools {
   polygon = 'polygon',
   line = 'line',
 }
+
+export enum ObjectPanelViews {
+  pages = 'pages',
+  layers = 'layers',
+}

@@ -23,6 +23,7 @@ const TypeButton = styled.div<{ active: boolean }>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  height: 40px;
 
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: 16px;
@@ -32,6 +33,10 @@ const TypeButton = styled.div<{ active: boolean }>`
   border-radius: 10px;
   color: ${(props) => (props.active ? props.theme.colors.mint : props.theme.colors.grey)};
   background-color: ${(props) => (props.active ? props.theme.colors.mint10 : props.theme.colors.white)};
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.mint10};
+  }
 `;
 
 const Objects = styled.div`
