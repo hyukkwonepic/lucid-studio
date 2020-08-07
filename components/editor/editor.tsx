@@ -8,14 +8,16 @@ import Canvas from '../canvas/canvas';
 
 const Editor = () => {
   useEffect(() => {
-    // REF: https://github.com/pixijs/pixi.js/issues/6414
-    window.addEventListener(
-      'wheel',
-      (e) => {
+    // REF: https://github.com/pixijs/pixi.js/issues/6414, https://stackoverflow.com/a/33083535
+    const handleWindowWheel = (e: WheelEvent) => {
+      if (e.ctrlKey) {
         e.preventDefault();
-      },
-      { passive: false },
-    );
+      }
+    };
+    window.addEventListener('wheel', handleWindowWheel, { passive: false });
+    return () => {
+      window.removeEventListener('wheel', handleWindowWheel);
+    };
   }, []);
 
   return (
