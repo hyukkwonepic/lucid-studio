@@ -24,7 +24,6 @@ const Tool = styled.div<{ active?: boolean }>`
   margin-top: 16px;
   width: 40px;
   height: 40px;
-  cursor: pointer;
   border-radius: 10px;
 
   ${(props) => {
