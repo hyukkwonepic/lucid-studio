@@ -8,6 +8,9 @@ const ObjectPanel = styled.div`
   left: 65px;
   bottom: 0;
   min-width: 280px;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 const TypeButtons = styled.div`
@@ -22,7 +25,6 @@ const TypeButton = styled.div<{ active: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   height: 40px;
 
   font-family: ${({ theme }) => theme.fonts.primary};
@@ -39,13 +41,63 @@ const TypeButton = styled.div<{ active: boolean }>`
   }
 `;
 
-const Objects = styled.div`
-  padding: 8px 16px 0 16px;
+const ContentScrollContainer = styled.div`
+  flex: 1;
+`;
+
+const PageList = styled.div``;
+
+const PageListContent = styled.div`
+  padding: 8px 16px;
+`;
+
+const PageListToolbar = styled.div`
+  display: flex;
+  padding: 8px 16px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.background};
+`;
+
+const PageListTool = styled.div`
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+const ObjectItem = styled.div<{
+  active?: boolean;
+}>`
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 16px;
+  border: 1px solid ${(props) => (props.active ? props.theme.colors.mint90 : props.theme.colors.white)};
+
+  font-family: ${({ theme }) => theme.fonts.primary};
+  font-size: 16px;
+  line-height: 20px;
+  color: ${(props) => (props.active ? props.theme.colors.white : props.theme.colors.grey)};
+  background-color: ${(props) => (props.active ? props.theme.colors.mint90 : props.theme.colors.white)};
 `;
 
 export const Styled = {
   ObjectPanel,
   TypeButtons,
   TypeButton,
-  Objects,
+  ContentScrollContainer,
+  PageList,
+  PageListContent,
+  PageListToolbar,
+  PageListTool,
+  ObjectItem,
 };
