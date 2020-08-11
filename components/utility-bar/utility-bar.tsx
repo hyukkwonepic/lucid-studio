@@ -1,10 +1,9 @@
 import { Styled } from './utility-bar.styles';
 import { FC, useState, useRef, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { fileNameState } from '../../recoil/atoms';
+import { useEditor } from '../../hooks/useEditor';
 
 const Title: FC = () => {
-  const [title, setTitle] = useRecoilState(fileNameState);
+  const { title, setTitle } = useEditor();
 
   const inputRef = useRef<HTMLInputElement>(null);
 

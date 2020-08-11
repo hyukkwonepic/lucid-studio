@@ -23,7 +23,7 @@ const Title = styled.div`
     text-align: center;
     display: block;
     font-family: ${({ theme }) => theme.fonts.primary};
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
     color: ${({ theme }) => theme.colors.charcoal};
   }
