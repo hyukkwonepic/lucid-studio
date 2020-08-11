@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 
-const Canvas = styled.div`
+const CanvasContainer = styled.div`
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 345px;
+  top: 49px;
   right: 0px;
   bottom: 0px;
-  width: auto;
-  height: auto;
-  background-color: rgb(229, 229, 229);
-  z-index: 1;
+  z-index: 2;
+  overflow: hidden;
 `;
 
 export const Styled = {
-  Canvas,
+  CanvasContainer,
 };
