@@ -1,42 +1,45 @@
-import { atom, atomFamily } from 'recoil';
-import { Tools, ObjectPanelViews } from '../enums';
-import { PageState, PageListState } from '../types';
+import { atomFamily, RecoilState } from '../services/recoil-unstable';
+import { nanoid } from 'nanoid';
 
-export const fileNameState = atom({
-  key: 'fileName',
-  default: 'Untitled',
+// 2. GraphicObject
+
+export type GraphicObject = GroupState | ArtboardState | RectangleState;
+
+// Group
+export type GroupState = {
+  type: 'group';
+  id: string;
+  name: string;
+  children: RecoilState<GraphicObject>[];
+};
+
+export const groupStateFamily = atomFamily<GroupState, any>({
+  key: 'group',
+  default: (param: GroupState) => param,
 });
 
-// REF: https://stackoverflow.com/a/52396706
-export const toolState = atom<typeof Tools[keyof typeof Tools]>({
-  key: 'tool',
-  default: Tools.move,
-});
+// Artboard
+export type ArtboardState = {
+  type: 'artboard';
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: string;
+  children: RecoilState<GraphicObject>[];
+};
 
-export const objectPanelViewState = atom<typeof ObjectPanelViews[keyof typeof ObjectPanelViews]>({
-  key: 'objectPanelView',
-  default: ObjectPanelViews.layers,
-});
+export type ArtboardStateFamilyParam = Omit<ArtboardState, 'type' | 'id' | 'name' | 'children'>;
 
-export const pageListState = atom<PageListState>({
-  key: 'pageList',
-  default: {
-    items: [
-      {
-        id: 1,
-        name: 'Page 1',
-      },
-    ],
-    selectedItemId: 1,
-  },
-});
-
-export const pageStateFamily = atomFamily<PageState, PageState>({
-  key: 'page',
-  default: ({ id, name }) => {
-    return {
-      id,
-      name,
-    };
-  },
+export const artboardStateFamily = atomFamily<ArtboardState, ArtboardStateFamilyParam>({
+  key: 'artboard',
+  default: (param: ArtboardStateFamilyParam) => ({
+    ...param,
+    type: 'artboard',
+    id: nanoid(),
+    name: 'Artboard',
+    children: [],
+  }),
 });
