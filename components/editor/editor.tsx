@@ -4,7 +4,9 @@ import UtilityBar from '../utility-bar/utility-bar';
 import ToolBar from '../toolbar/toolbar';
 import ObjectPanel from '../object-panel/object-panel';
 import { useEffect } from 'react';
-import Canvas from '../canvas/canvas';
+import dynamic from 'next/dynamic';
+
+const Canvas = dynamic(() => import('../canvas/canvas'), { ssr: false });
 
 const Editor = () => {
   useEffect(() => {
