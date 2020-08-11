@@ -6,9 +6,8 @@ import EllipseTool from '../../svgs/ellipse-tool';
 import PolygonTool from '../../svgs/polygon-tool';
 import LineTool from '../../svgs/line-tool';
 import RectangleTool from '../../svgs/rectangle-tool';
-import { useRecoilState } from 'recoil';
-import { toolState } from '../../recoil/atoms';
 import { Tools } from '../../enums';
+import { useEditor } from '../../hooks/useEditor';
 
 const ToolIcons = {
   [Tools.move]: MoveTool,
@@ -20,7 +19,11 @@ const ToolIcons = {
 };
 
 const Toolbar = () => {
-  const [tool, setTool] = useRecoilState(toolState);
+  const editor = useEditor();
+
+  const handleToolClick = (tool: Tools) => () => {
+    editor.selectTool(tool);
+  };
 
   return (
     <Styled.Toolbar>
@@ -28,14 +31,8 @@ const Toolbar = () => {
         {Object.keys(Tools).map((key) => {
           const Icon = ToolIcons[key];
           return (
-            <Styled.Tool
-              key={key}
-              active={tool === Tools[key]}
-              onClick={() => {
-                setTool(Tools[key]);
-              }}
-            >
-              <Icon active={tool === Tools[key]} />
+            <Styled.Tool key={key} active={editor.selectedTool === Tools[key]} onClick={handleToolClick(Tools[key])}>
+              <Icon active={editor.selectedTool === Tools[key]} />
             </Styled.Tool>
           );
         })}
