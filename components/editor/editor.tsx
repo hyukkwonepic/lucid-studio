@@ -24,7 +24,7 @@ const Editor = () => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://use.typekit.net/qcg2exe.css" />
       </Head>
       <Styled.Editor>
         <UtilityBar />
