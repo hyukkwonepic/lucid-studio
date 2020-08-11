@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ToolIcon } from '../types';
 
 const EllipseTool: FC<ToolIcon> = ({ active, ...rest }) => {
-  const color = active ? '#50bd94' : '#999999';
+  const color = active ? '#3EB489' : '#999999';
   return (
     <svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...rest}>
       <path

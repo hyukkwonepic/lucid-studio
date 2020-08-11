@@ -1,81 +1,39 @@
 import React, { FC } from 'react';
 import { Styled } from './object-panel.styles';
-import { useRecoilState } from 'recoil';
-import { objectPanelViewState } from '../../recoil/atoms';
 import { ObjectPanelViews } from '../../enums';
-import AddTool from '../../svgs/add-tool';
-import DeleteTool from '../../svgs/delete-tool';
-import { usePageList } from '../../hooks/usePageList';
-import { usePage } from '../../hooks/usePageItem';
+import { useEditor } from '../../hooks/useEditor';
+import PagesView from './pages-view/pages-view';
+import LayersView from './layers-view/layers-view';
 
-const PageList: FC = () => {
-  const { items, selectedItemId, addItem, deleteItem } = usePageList();
+const ObjectPanel: FC = () => {
+  const editor = useEditor();
 
-  return (
-    <Styled.PageList>
-      <Styled.PageListToolbar>
-        <Styled.PageListTool onClick={addItem}>
-          <AddTool />
-        </Styled.PageListTool>
-        <Styled.PageListTool onClick={() => deleteItem(selectedItemId)}>
-          <DeleteTool />
-        </Styled.PageListTool>
-      </Styled.PageListToolbar>
+  const handleViewButtonClick = (view: ObjectPanelViews) => () => {
+    editor.selectObjectPanelView(view);
+  };
 
-      <Styled.PageListContent>
-        {items.map((item) => {
-          return <Page key={item.id} item={item} />;
-        })}
-      </Styled.PageListContent>
-    </Styled.PageList>
-  );
-};
-
-const Page: FC<{ item: { id: number; name: string } }> = ({ item }) => {
-  const { selectedItemId, selectItem } = usePageList();
-  const page = usePage(item);
-
-  return (
-    <Styled.ObjectItem
-      active={selectedItemId === page.id}
-      onClick={() => {
-        selectItem(page.id);
-      }}
-    >
-      {page.name}
-    </Styled.ObjectItem>
-  );
-};
-
-const LayerList = () => {
-  return <div></div>;
-};
-
-const ObjectPanel = () => {
-  const [objectPanelView, setObjectPanelView] = useRecoilState(objectPanelViewState);
-
-  const handleTypeButtonClick = (view: ObjectPanelViews) => () => {
-    setObjectPanelView(view);
+  const handleClick = () => {
+    console.log(editor.selectedTool);
   };
 
   return (
-    <Styled.ObjectPanel>
-      <Styled.TypeButtons>
-        <Styled.TypeButton
-          active={objectPanelView === ObjectPanelViews.pages}
-          onClick={handleTypeButtonClick(ObjectPanelViews.pages)}
+    <Styled.ObjectPanel onClick={handleClick}>
+      <Styled.ViewButtons>
+        <Styled.ViewButton
+          active={editor.selectedObjectPanelView === ObjectPanelViews.pages}
+          onClick={handleViewButtonClick(ObjectPanelViews.pages)}
         >
           Pages
-        </Styled.TypeButton>
-        <Styled.TypeButton
-          active={objectPanelView === ObjectPanelViews.layers}
-          onClick={handleTypeButtonClick(ObjectPanelViews.layers)}
+        </Styled.ViewButton>
+        <Styled.ViewButton
+          active={editor.selectedObjectPanelView === ObjectPanelViews.layers}
+          onClick={handleViewButtonClick(ObjectPanelViews.layers)}
         >
           Layers
-        </Styled.TypeButton>
-      </Styled.TypeButtons>
-      {objectPanelView === ObjectPanelViews.pages && <PageList />}
-      {objectPanelView === ObjectPanelViews.layers && <LayerList />}
+        </Styled.ViewButton>
+      </Styled.ViewButtons>
+      {editor.selectedObjectPanelView === ObjectPanelViews.pages && <PagesView />}
+      {editor.selectedObjectPanelView === ObjectPanelViews.layers && <LayersView />}
     </Styled.ObjectPanel>
   );
 };
