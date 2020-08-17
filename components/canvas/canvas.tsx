@@ -32,7 +32,8 @@ const Canvas: FC = () => {
         <Stage
           options={{
             backgroundColor: 0xe5e5e5,
-            resolution: window.devicePixelRatio || 1,
+            resolution: 1,
+            antialias: true,
           }}
           width={editor.canvas.width}
           height={editor.canvas.height}

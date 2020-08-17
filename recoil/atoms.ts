@@ -1,5 +1,11 @@
-import { atomFamily, RecoilState } from '../services/recoil-unstable';
+import { atomFamily, RecoilState, atom } from '../services/recoil-unstable';
 import { nanoid } from 'nanoid';
+import { RectangleState, Rectangle } from '../hooks/useRectangle';
+
+export const dummyState = atom<undefined>({
+  key: 'dummy',
+  default: undefined,
+});
 
 // 2. GraphicObject
 
