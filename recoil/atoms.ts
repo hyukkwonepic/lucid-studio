@@ -3,14 +3,15 @@ import { nanoid } from 'nanoid';
 
 // 2. GraphicObject
 
-export type GraphicObject = GroupState | ArtboardState | RectangleState;
+export type GraphicObjectState = GroupState | ArtboardState | RectangleState;
+export type GraphicsObject = Rectangle;
 
 // Group
 export type GroupState = {
   type: 'group';
   id: string;
   name: string;
-  children: RecoilState<GraphicObject>[];
+  children: RecoilState<GraphicObjectState>[];
 };
 
 export const groupStateFamily = atomFamily<GroupState, any>({
@@ -28,7 +29,7 @@ export type ArtboardState = {
   width: number;
   height: number;
   fill: string;
-  children: RecoilState<GraphicObject>[];
+  children: RecoilState<GraphicObjectState>[];
 };
 
 export type ArtboardStateFamilyParam = Omit<ArtboardState, 'type' | 'id' | 'name' | 'children'>;

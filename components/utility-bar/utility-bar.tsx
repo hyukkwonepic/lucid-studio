@@ -1,9 +1,10 @@
 import { Styled } from './utility-bar.styles';
 import { FC, useState, useRef, useEffect } from 'react';
-import { useEditor } from '../../hooks/useEditor';
+import { useTitle } from '../../hooks/useTitle';
 
 const Title: FC = () => {
-  const { title, setTitle } = useEditor();
+  // const { title, setTitle } = useEditor();
+  const title = useTitle();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -21,7 +22,7 @@ const Title: FC = () => {
 
   const handleInputBlur = (e) => {
     if (e.target.value) {
-      setTitle(e.target.value);
+      title.setValue(e.target.value);
     }
     setMode('text');
   };
@@ -30,7 +31,7 @@ const Title: FC = () => {
     if (e.key === 'Enter' || e.key === 'Escape') {
       const target = e.target as EventTarget & HTMLInputElement;
       if (target.value) {
-        setTitle(target.value);
+        title.setValue(target.value);
       }
       setMode('text');
     }
@@ -39,14 +40,14 @@ const Title: FC = () => {
   return (
     <Styled.Title>
       {mode === 'text' ? (
-        <span onClick={handleTitleClick}>{title}</span>
+        <span onClick={handleTitleClick}>{title.value}</span>
       ) : (
         <input
           ref={inputRef}
           autoCorrect="off"
           autoComplete="off"
           autoCapitalize="off"
-          defaultValue={title}
+          defaultValue={title.value}
           onBlur={handleInputBlur}
           onKeyDown={handleInputKeyDown}
         />

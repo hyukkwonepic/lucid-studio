@@ -7,7 +7,7 @@ import PolygonTool from '../../svgs/polygon-tool';
 import LineTool from '../../svgs/line-tool';
 import RectangleTool from '../../svgs/rectangle-tool';
 import { Tools } from '../../enums';
-import { useEditor } from '../../hooks/useEditor';
+import { useTool } from '../../hooks/useTool';
 
 const ToolIcons = {
   [Tools.move]: MoveTool,
@@ -19,10 +19,10 @@ const ToolIcons = {
 };
 
 const Toolbar = () => {
-  const editor = useEditor();
+  const tool = useTool();
 
-  const handleToolClick = (tool: Tools) => () => {
-    editor.selectTool(tool);
+  const handleToolClick = (type: Tools) => () => {
+    tool.setType(type);
   };
 
   return (
@@ -31,8 +31,8 @@ const Toolbar = () => {
         {Object.keys(Tools).map((key) => {
           const Icon = ToolIcons[key];
           return (
-            <Styled.Tool key={key} active={editor.selectedTool === Tools[key]} onClick={handleToolClick(Tools[key])}>
-              <Icon active={editor.selectedTool === Tools[key]} />
+            <Styled.Tool key={key} active={tool.type === Tools[key]} onClick={handleToolClick(Tools[key])}>
+              <Icon active={tool.type === Tools[key]} />
             </Styled.Tool>
           );
         })}

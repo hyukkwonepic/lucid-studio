@@ -16,6 +16,7 @@ export type RectangleState = {
 
 export type Rectangle = RectangleState & {
   moveTo: (x: number, y: number) => void;
+  resize: (width: number, height: number) => void;
 };
 
 export type RectangleStateFamilyParam = Omit<RectangleState, 'type' | 'id' | 'name'>;
@@ -41,8 +42,17 @@ export const useRectangle = (rectangleState: RecoilState<RectangleState>): Recta
     }));
   };
 
+  const resize = (width: number, height: number) => {
+    setRectangle((rectangle) => ({
+      ...rectangle,
+      width,
+      height,
+    }));
+  };
+
   return {
     ...rectangle,
     moveTo,
+    resize,
   };
 };
