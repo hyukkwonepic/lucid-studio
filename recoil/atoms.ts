@@ -2,8 +2,8 @@ import { atomFamily, RecoilState, atom } from '../services/recoil-unstable';
 import { nanoid } from 'nanoid';
 import { RectangleState, Rectangle } from '../hooks/useRectangle';
 
-export const dummyState = atom<undefined>({
-  key: 'dummy',
+export const undefinedState = atom<undefined>({
+  key: 'undefined',
   default: undefined,
 });
 

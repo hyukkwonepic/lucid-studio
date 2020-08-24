@@ -10,7 +10,7 @@ import { Tools } from '../../enums';
 import { useTool } from '../../hooks/useTool';
 
 const ToolIcons = {
-  [Tools.move]: MoveTool,
+  [Tools.selection]: MoveTool,
   [Tools.artboard]: ArtboardTool,
   [Tools.rectangle]: RectangleTool,
   [Tools.ellipse]: EllipseTool,

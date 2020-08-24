@@ -11,7 +11,7 @@ export type RectangleState = {
   width: number;
   height: number;
   angle: number;
-  fill: number;
+  fill: string;
 };
 
 export type Rectangle = RectangleState & {

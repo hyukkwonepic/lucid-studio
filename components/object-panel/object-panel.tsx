@@ -12,12 +12,8 @@ const ObjectPanel: FC = () => {
     editor.selectObjectPanelView(view);
   };
 
-  const handleClick = () => {
-    console.log(editor.selectedTool);
-  };
-
   return (
-    <Styled.ObjectPanel onClick={handleClick}>
+    <Styled.ObjectPanel>
       <Styled.ViewButtons>
         <Styled.ViewButton
           active={editor.selectedObjectPanelView === ObjectPanelViews.pages}

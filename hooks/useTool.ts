@@ -12,7 +12,7 @@ export type Tool = ToolState & {
 export const toolState = atom<ToolState>({
   key: 'tool',
   default: {
-    type: Tools.move,
+    type: Tools.selection,
   },
 });
 

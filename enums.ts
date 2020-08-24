@@ -1,5 +1,5 @@
 export enum Tools {
-  move = 'move',
+  selection = 'selection',
   artboard = 'artboard',
   rectangle = 'rectangle',
   ellipse = 'ellipse',

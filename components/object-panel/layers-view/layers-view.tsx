@@ -3,11 +3,25 @@ import { Styled } from './layers-view.styles';
 import { useEditor } from '../../../hooks/useEditor';
 import { usePage } from '../../../hooks/usePage';
 import { RecoilState, useRecoilState } from '../../../services/recoil-unstable';
-import { GraphicObject } from '../../../recoil/atoms';
+import { GraphicObjectState } from '../../../recoil/atoms';
 
-const Layer: FC<{ graphicObjectState: RecoilState<GraphicObject> }> = ({ graphicObjectState }) => {
+const Layer: FC<{ graphicObjectState: RecoilState<GraphicObjectState> }> = ({ graphicObjectState }) => {
+  const editor = useEditor();
+  const page = usePage(editor.selectedPage);
+
   const [graphicObject] = useRecoilState(graphicObjectState);
-  return <Styled.ObjectItem active={false}>{graphicObject.name}</Styled.ObjectItem>;
+
+  const selected = page.selectedGraphicObjects.includes(graphicObjectState);
+
+  const handleClick = () => {
+    page.selectSingleGraphicObject(graphicObjectState);
+  };
+
+  return (
+    <Styled.ObjectItem active={selected} onClick={handleClick}>
+      {graphicObject.name}
+    </Styled.ObjectItem>
+  );
 };
 
 const LayersView: FC = () => {
