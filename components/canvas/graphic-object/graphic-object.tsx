@@ -1,21 +1,17 @@
 import { FC } from 'react';
-import { GraphicObjectState } from '../../../recoil/atoms';
-import { useRecoilValue, RecoilState } from '../../../services/recoil-unstable';
 import { RectangleState } from '../../../hooks/useRectangle';
+import { useRecoilValue, RecoilState } from '../../../services/recoil-unstable';
 import Rectangle from '../rectangle/rectangle';
+import { GraphicObjectState } from '../../../recoil/atoms';
 
-type GraphicsObjectProps = {
+const GraphicObject: FC<{
   graphicObjectState: RecoilState<GraphicObjectState>;
-};
-
-const GraphicObject: FC<GraphicsObjectProps> = ({ graphicObjectState }) => {
-  const graphicObject = useRecoilValue(graphicObjectState);
-  if (graphicObject.type === 'rectangle') {
-    const rectangleState = graphicObjectState as RecoilState<RectangleState>;
-    return <Rectangle rectangleState={rectangleState} />;
+}> = ({ graphicObjectState }) => {
+  const { type } = useRecoilValue(graphicObjectState);
+  if (type === 'rectangle') {
+    return <Rectangle rectangleState={graphicObjectState as RecoilState<RectangleState>} />;
   }
-
-  return null;
+  return <div></div>;
 };
 
 export default GraphicObject;
