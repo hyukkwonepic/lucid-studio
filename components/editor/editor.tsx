@@ -4,10 +4,8 @@ import UtilityBar from '../utility-bar/utility-bar';
 import ToolBar from '../toolbar/toolbar';
 import ObjectPanel from '../object-panel/object-panel';
 import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { useCursor } from '../../hooks/useCursor';
-
-const Canvas = dynamic(() => import('../canvas/canvas'), { ssr: false });
+import Canvas from '../canvas/canvas';
 
 const Editor = () => {
   const cursor = useCursor();

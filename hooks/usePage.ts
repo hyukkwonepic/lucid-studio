@@ -1,5 +1,6 @@
 import { useRecoilState, RecoilState, atomFamily } from '../services/recoil-unstable';
 import { GraphicObjectState } from '../recoil/atoms';
+import { MutableRefObject } from 'react';
 
 export type PageState = {
   id: string;
@@ -7,15 +8,18 @@ export type PageState = {
   children: RecoilState<GraphicObjectState>[];
   selectedGraphicObjects: RecoilState<GraphicObjectState>[];
   hoveredGraphicObject: RecoilState<GraphicObjectState> | undefined;
+  ref: MutableRefObject<Element>;
 };
 
 export type Page = PageState & {
   addChild: (child: RecoilState<GraphicObjectState>) => void;
+  selectSingleGraphicObject: (graphicObject: RecoilState<GraphicObjectState>) => void;
   selectGraphicObject: (graphicObject: RecoilState<GraphicObjectState>) => void;
   unselectGraphicObject: (graphicObject: RecoilState<GraphicObjectState>) => void;
   resetSelectedGraphicObject: () => void;
   hoverGraphicObject: (graphicObject: RecoilState<GraphicObjectState>) => void;
-  hoverOutGraphicObject: () => void;
+  hoverOffGraphicObject: () => void;
+  setRef: (ref: MutableRefObject<Element>) => void;
 };
 
 export type PageStateFamilyParam = {
@@ -31,6 +35,7 @@ export const pageStateFamily = atomFamily<PageState, PageStateFamilyParam>({
     children: [],
     selectedGraphicObjects: [],
     hoveredGraphicObject: undefined,
+    ref: null,
   }),
 });
 
@@ -44,18 +49,27 @@ export const usePage = (pageState: RecoilState<PageState>): Page => {
     }));
   };
 
+  const selectSingleGraphicObject = (graphicObject: RecoilState<GraphicObjectState>) => {
+    setPage((page) => ({
+      ...page,
+      selectedGraphicObjects: [graphicObject],
+    }));
+  };
+
   const selectGraphicObject = (graphicObject: RecoilState<GraphicObjectState>) => {
     setPage((page) => ({
       ...page,
       selectedGraphicObjects: [...page.selectedGraphicObjects, graphicObject],
     }));
   };
+
   const unselectGraphicObject = (graphicObject: RecoilState<GraphicObjectState>) => {
     setPage((page) => ({
       ...page,
       selectedGraphicObjects: page.selectedGraphicObjects.filter((item) => item !== graphicObject),
     }));
   };
+
   const resetSelectedGraphicObject = () => {
     setPage((page) => ({
       ...page,
@@ -70,20 +84,29 @@ export const usePage = (pageState: RecoilState<PageState>): Page => {
     }));
   };
 
-  const hoverOutGraphicObject = () => {
+  const hoverOffGraphicObject = () => {
     setPage((page) => ({
       ...page,
       hoveredGraphicObject: undefined,
     }));
   };
 
+  const setRef = (ref: MutableRefObject<Element>) => {
+    setPage((page) => ({
+      ...page,
+      ref,
+    }));
+  };
+
   return {
     ...page,
     addChild,
+    selectSingleGraphicObject,
     selectGraphicObject,
     unselectGraphicObject,
     resetSelectedGraphicObject,
     hoverGraphicObject,
-    hoverOutGraphicObject,
+    hoverOffGraphicObject,
+    setRef,
   };
 };
