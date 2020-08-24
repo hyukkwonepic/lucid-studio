@@ -6,9 +6,9 @@ export const theme = {
     mint80: '#65C3A1',
     mint90: '#51BC95',
     mint: '#3EB489',
-    grey: '#999999',
+    grey: '#777777',
     white: '#ffffff',
-    charcoal: '#999999',
+    charcoal: '#777777',
   },
   fonts: {
     primary: 'Lato, sans-serif',
