@@ -17,6 +17,11 @@ const GraphicObjectHoverBox: FC<{ graphicObjectState: RecoilState<GraphicObjectS
 const HoverLayer = () => {
   const editor = useEditor();
   const page = usePage(editor.selectedPage);
+
+  if (page.isAnyGraphicObjectMoving) {
+    return null;
+  }
+
   return <>{page.hoveredGraphicObject && <GraphicObjectHoverBox graphicObjectState={page.hoveredGraphicObject} />}</>;
 };
 

@@ -15,7 +15,7 @@ const Rectangle: FC<{
   const { x, y, fill, angle, width, height } = rectangle;
 
   const [state, setState] = useState({
-    down: false,
+    isMouseDown: false,
     offset: {
       x: 0,
       y: 0,
@@ -24,36 +24,38 @@ const Rectangle: FC<{
 
   useEffect(() => {
     const handleMouseMove = (event: globalThis.MouseEvent) => {
+      page.setAnyGraphicObjectMovingState(true);
       const rect = page.ref.current.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       rectangle.moveTo(x - state.offset.x, y - state.offset.y);
     };
 
-    if (state.down) {
+    if (state.isMouseDown) {
       window.addEventListener('mousemove', handleMouseMove);
     }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [state, rectangle, page.ref]);
+  }, [page, state, rectangle, page.ref]);
 
   useEffect(() => {
     const handleMouseUp = () => {
-      setState((state) => ({ ...state, down: false }));
+      page.setAnyGraphicObjectMovingState(false);
+      setState((state) => ({ ...state, isMouseDown: false }));
     };
 
-    if (state.down) {
+    if (state.isMouseDown) {
       window.addEventListener('mouseup', handleMouseUp);
     }
 
     return () => {
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [state]);
+  }, [page, state]);
 
-  const handleMouseDown = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+  const handleMousedown = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
     event.stopPropagation();
     const element = event.target as HTMLElement;
     const x = event.clientX - element.getBoundingClientRect().left;
@@ -61,7 +63,7 @@ const Rectangle: FC<{
 
     page.selectSingleGraphicObject(rectangleState);
     setState({
-      down: true,
+      isMouseDown: true,
       offset: {
         x,
         y,
@@ -81,7 +83,7 @@ const Rectangle: FC<{
   return (
     <Styled.Rectangle
       ref={rectangleRef}
-      onMouseDown={handleMouseDown}
+      onMouseDown={handleMousedown}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
       style={{

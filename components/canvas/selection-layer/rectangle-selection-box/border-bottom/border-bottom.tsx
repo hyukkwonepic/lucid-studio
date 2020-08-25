@@ -11,7 +11,7 @@ const BorderBottom: FC<{
   const page = usePage(editor.selectedPage);
   const rectangle = useRectangle(rectangleState);
   const [state, setState] = useState({
-    down: false,
+    isMouseDown: false,
     rectangle: {
       x: 0,
       y: 0,
@@ -34,7 +34,7 @@ const BorderBottom: FC<{
       }
     };
 
-    if (state.down) {
+    if (state.isMouseDown) {
       window.addEventListener('mousemove', handleMouseMove);
     }
 
@@ -45,10 +45,10 @@ const BorderBottom: FC<{
 
   useEffect(() => {
     const handleMouseUp = () => {
-      setState((state) => ({ ...state, down: false }));
+      setState((state) => ({ ...state, isMouseDown: false }));
     };
 
-    if (state.down) {
+    if (state.isMouseDown) {
       window.addEventListener('mouseup', handleMouseUp);
     }
 
@@ -60,7 +60,7 @@ const BorderBottom: FC<{
   const handleMouseDown = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
     event.stopPropagation();
     setState({
-      down: true,
+      isMouseDown: true,
       rectangle: {
         x: rectangle.x,
         y: rectangle.y,
@@ -74,9 +74,9 @@ const BorderBottom: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x - 2,
-        top: rectangle.y + rectangle.height,
-        width: rectangle.width + 2,
+        left: rectangle.x,
+        top: rectangle.y + rectangle.height - 1,
+        width: rectangle.width,
         height: '2px',
         backgroundColor: '#51BC95',
         cursor: 'ns-resize',

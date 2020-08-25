@@ -19,6 +19,11 @@ const GraphicObjectSelectionBox: FC<{ graphicObjectState: RecoilState<GraphicObj
 const SelectionLayer = () => {
   const editor = useEditor();
   const page = usePage(editor.selectedPage);
+
+  if (page.isAnyGraphicObjectMoving) {
+    return null;
+  }
+
   return (
     <>
       {page.selectedGraphicObjects.map((graphicObject) => (

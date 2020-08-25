@@ -14,7 +14,7 @@ const RectangleLayer = () => {
   const page = usePage(editor.selectedPage);
 
   const [state, setState] = useState({
-    down: false,
+    isMouseDown: false,
     coordinate: {
       x: 0,
       y: 0,
@@ -29,7 +29,7 @@ const RectangleLayer = () => {
   }
 
   const resetLocalStates = () => {
-    setState({ down: false, coordinate: { x: 0, y: 0 } });
+    setState({ isMouseDown: false, coordinate: { x: 0, y: 0 } });
     setTargetRectangleState(null);
   };
 
@@ -59,7 +59,7 @@ const RectangleLayer = () => {
     event.stopPropagation();
     const { x, y } = getMouseCoordinate(event);
     setState({
-      down: true,
+      isMouseDown: true,
       coordinate: {
         x,
         y,
@@ -68,7 +68,7 @@ const RectangleLayer = () => {
   };
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-    if (!state.down) {
+    if (!state.isMouseDown) {
       return;
     }
 
