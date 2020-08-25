@@ -30,8 +30,8 @@ const LeftTopResizer: FC<{
       const newHeight = state.rectangle.height + state.rectangle.y - y;
 
       rectangle.moveTo(
-        x < state.rectangle.x + state.rectangle.width ? x : state.rectangle.x + state.rectangle.width - 1,
-        y,
+        newWidth > 0 ? x : state.rectangle.x + state.rectangle.width,
+        newHeight > 0 ? y : state.rectangle.y + state.rectangle.height,
       );
       rectangle.resize(newWidth > 0 ? newWidth : 1, newHeight > 0 ? newHeight : 1);
     };
