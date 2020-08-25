@@ -1,4 +1,4 @@
-import { atomFamily, RecoilState, atom } from '../services/recoil-unstable';
+import { atomFamily, RecoilState, atom } from 'recoil';
 import { nanoid } from 'nanoid';
 import { RectangleState, Rectangle } from '../hooks/useRectangle';
 

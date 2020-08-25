@@ -5,7 +5,7 @@ import { useRectangle, rectangleStateFamily, RectangleState } from '../../../../
 import { useState, MouseEvent } from 'react';
 import { Styled } from './rectangle-layer.styles.';
 import { undefinedState } from '../../../../recoil/atoms';
-import { RecoilState } from '../../../../services/recoil-unstable';
+import { RecoilState } from 'recoil';
 import { Tools } from '../../../../enums';
 
 const RectangleLayer = () => {

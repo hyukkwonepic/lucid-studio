@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from '../services/recoil-unstable';
+import { atom, useRecoilState } from 'recoil';
 
 type CursorState = {
   type: string;

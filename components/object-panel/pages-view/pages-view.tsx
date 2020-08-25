@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { Styled } from './pages-view.styles';
 import AddTool from '../../../svgs/add-tool';
 import DeleteTool from '../../../svgs/delete-tool';
-import { RecoilState } from '../../../services/recoil-unstable';
+import { RecoilState } from 'recoil';
 
 const Page: FC<{ pageState: RecoilState<PageState> }> = ({ pageState }) => {
   const editor = useEditor();

@@ -1,4 +1,4 @@
-import { useRecoilState, RecoilState, atom } from '../services/recoil-unstable';
+import { useRecoilState, RecoilState, atom } from 'recoil';
 import { PageState, pageStateFamily } from './usePage';
 import { ObjectPanelViews } from '../enums';
 import { nanoid } from 'nanoid';
