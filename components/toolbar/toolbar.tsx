@@ -22,6 +22,12 @@ const Toolbar = () => {
   const tool = useTool();
 
   const handleToolClick = (type: Tools) => () => {
+    // TODO: Remove alert when tool is implemented
+    if (type !== Tools.rectangle && type !== Tools.selection) {
+      window.alert('Sorry. The tool is under development. 🚧');
+      return;
+    }
+
     tool.setType(type);
   };
 
