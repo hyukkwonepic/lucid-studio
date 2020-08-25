@@ -9,6 +9,7 @@ export type PageState = {
   selectedGraphicObjects: RecoilState<GraphicObjectState>[];
   hoveredGraphicObject: RecoilState<GraphicObjectState> | undefined;
   ref: MutableRefObject<Element>;
+  isAnyGraphicObjectMoving: boolean;
 };
 
 export type Page = PageState & {
@@ -20,6 +21,7 @@ export type Page = PageState & {
   hoverGraphicObject: (graphicObject: RecoilState<GraphicObjectState>) => void;
   hoverOffGraphicObject: () => void;
   setRef: (ref: MutableRefObject<Element>) => void;
+  setAnyGraphicObjectMovingState: (state: boolean) => void;
 };
 
 export type PageStateFamilyParam = {
@@ -36,6 +38,7 @@ export const pageStateFamily = atomFamily<PageState, PageStateFamilyParam>({
     selectedGraphicObjects: [],
     hoveredGraphicObject: undefined,
     ref: null,
+    isAnyGraphicObjectMoving: false,
   }),
 });
 
@@ -98,6 +101,13 @@ export const usePage = (pageState: RecoilState<PageState>): Page => {
     }));
   };
 
+  const setAnyGraphicObjectMovingState = (state: boolean) => {
+    setPage((page) => ({
+      ...page,
+      isAnyGraphicObjectMoving: state,
+    }));
+  };
+
   return {
     ...page,
     addChild,
@@ -108,5 +118,6 @@ export const usePage = (pageState: RecoilState<PageState>): Page => {
     hoverGraphicObject,
     hoverOffGraphicObject,
     setRef,
+    setAnyGraphicObjectMovingState,
   };
 };
