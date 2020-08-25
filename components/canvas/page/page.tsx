@@ -25,8 +25,8 @@ const Page: FC = () => {
       {page.children.map((graphicObject) => {
         return <GraphicObject key={graphicObject.key} graphicObjectState={graphicObject} />;
       })}
-      <SelectionLayer />
       <HoverLayer />
+      <SelectionLayer />
       <RectangleLayer />
     </Styled.Page>
   );

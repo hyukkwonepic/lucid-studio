@@ -4,7 +4,7 @@ import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle'
 import { useState, useEffect, FC, MouseEvent } from 'react';
 import { RecoilState } from 'recoil';
 
-const BorderBottom: FC<{
+const BottomResizer: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -86,4 +86,4 @@ const BorderBottom: FC<{
   );
 };
 
-export default BorderBottom;
+export default BottomResizer;

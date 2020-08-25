@@ -1,10 +1,10 @@
+import React, { FC, useState, useEffect, MouseEvent } from 'react';
+import { RecoilState } from 'recoil';
+import { RectangleState, useRectangle } from '../../../../../hooks/useRectangle';
 import { useEditor } from '../../../../../hooks/useEditor';
 import { usePage } from '../../../../../hooks/usePage';
-import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
-import { useState, useEffect, FC, MouseEvent } from 'react';
-import { RecoilState } from 'recoil';
 
-const BorderTop: FC<{
+const LeftBottomResizer: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -23,16 +23,18 @@ const BorderTop: FC<{
   useEffect(() => {
     const handleMouseMove = (event: globalThis.MouseEvent) => {
       const rect = page.ref.current.getBoundingClientRect();
+      const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      const newHeight = state.rectangle.height + state.rectangle.y - y;
+      const newWidth = state.rectangle.width - (x - state.rectangle.x);
+      const newHeight = state.rectangle.height + (y - (state.rectangle.y + state.rectangle.height));
 
-      if (newHeight > 0) {
-        rectangle.moveTo(rectangle.x, y);
-        rectangle.resize(rectangle.width, newHeight);
+      if (newWidth > 0) {
+        rectangle.moveTo(state.rectangle.x + (x - state.rectangle.x), rectangle.y);
+        rectangle.resize(newWidth, newHeight > 0 ? newHeight : 1);
       } else {
-        rectangle.moveTo(rectangle.x, state.rectangle.y + state.rectangle.height - 1);
-        rectangle.resize(rectangle.width, 1);
+        rectangle.moveTo(state.rectangle.x + state.rectangle.width, rectangle.y);
+        rectangle.resize(1, newHeight > 0 ? newHeight : 1);
       }
     };
 
@@ -76,16 +78,18 @@ const BorderTop: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x,
-        top: rectangle.y - 1,
-        width: rectangle.width,
-        height: '2px',
-        backgroundColor: '#51BC95',
-        cursor: 'ns-resize',
+        left: rectangle.x - 6,
+        top: rectangle.y + rectangle.height - 6,
+        width: '12px',
+        height: '12px',
+        borderRadius: '6px',
+        backgroundColor: '#ffffff',
+        border: '2px solid #51BC95',
+        cursor: 'nesw-resize',
       }}
       onMouseDown={handleMouseDown}
     />
   );
 };
 
-export default BorderTop;
+export default LeftBottomResizer;

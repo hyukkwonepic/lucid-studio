@@ -1,10 +1,10 @@
+import React, { FC, useState, useEffect, MouseEvent } from 'react';
+import { RecoilState } from 'recoil';
+import { RectangleState, useRectangle } from '../../../../../hooks/useRectangle';
 import { useEditor } from '../../../../../hooks/useEditor';
 import { usePage } from '../../../../../hooks/usePage';
-import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
-import { useState, useEffect, FC, MouseEvent } from 'react';
-import { RecoilState } from 'recoil';
 
-const BorderLeft: FC<{
+const LeftTopResizer: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -23,18 +23,17 @@ const BorderLeft: FC<{
   useEffect(() => {
     const handleMouseMove = (event: globalThis.MouseEvent) => {
       const rect = page.ref.current.getBoundingClientRect();
-
       const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
 
       const newWidth = state.rectangle.width + state.rectangle.x - x;
+      const newHeight = state.rectangle.height + state.rectangle.y - y;
 
-      if (newWidth > 0) {
-        rectangle.moveTo(x, rectangle.y);
-        rectangle.resize(newWidth, rectangle.height);
-      } else {
-        rectangle.moveTo(state.rectangle.x + state.rectangle.width - 1, rectangle.y);
-        rectangle.resize(1, rectangle.height);
-      }
+      rectangle.moveTo(
+        x < state.rectangle.x + state.rectangle.width ? x : state.rectangle.x + state.rectangle.width - 1,
+        y,
+      );
+      rectangle.resize(newWidth > 0 ? newWidth : 1, newHeight > 0 ? newHeight : 1);
     };
 
     if (state.isMouseDown) {
@@ -72,21 +71,22 @@ const BorderLeft: FC<{
       },
     });
   };
-
   return (
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x - 1,
-        top: rectangle.y,
-        width: '2px',
-        height: rectangle.height,
-        backgroundColor: '#51BC95',
-        cursor: 'ew-resize',
+        left: rectangle.x - 6,
+        top: rectangle.y - 6,
+        width: '12px',
+        height: '12px',
+        borderRadius: '6px',
+        backgroundColor: '#ffffff',
+        border: '2px solid #51BC95',
+        cursor: 'nwse-resize',
       }}
       onMouseDown={handleMouseDown}
     />
   );
 };
 
-export default BorderLeft;
+export default LeftTopResizer;
