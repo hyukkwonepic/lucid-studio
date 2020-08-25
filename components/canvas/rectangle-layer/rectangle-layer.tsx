@@ -7,6 +7,7 @@ import { Styled } from './rectangle-layer.styles.';
 import { undefinedState } from '../../../recoil/atoms';
 import { Tools } from '../../../enums';
 import { RecoilState } from 'recoil';
+import { createRandomHexColor, createRandomGreyHexColor } from '../../../services/random-color/random-color';
 
 const RectangleLayer = () => {
   const tool = useTool();
@@ -88,7 +89,7 @@ const RectangleLayer = () => {
       width,
       height,
       angle: 0,
-      fill: '#ffffff',
+      fill: createRandomGreyHexColor(),
     });
     setTargetRectangleState(rectangleState);
     page.addChild(rectangleState);
@@ -105,7 +106,7 @@ const RectangleLayer = () => {
         width: 100,
         height: 100,
         angle: 0,
-        fill: '#ffffff',
+        fill: createRandomGreyHexColor(),
       });
       page.addChild(rectangleState);
       page.selectSingleGraphicObject(rectangleState);
