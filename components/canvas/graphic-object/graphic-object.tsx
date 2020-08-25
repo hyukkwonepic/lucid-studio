@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { RectangleState } from '../../../hooks/useRectangle';
-import { useRecoilValue, RecoilState } from '../../../services/recoil-unstable';
+import { useRecoilValue, RecoilState } from 'recoil';
 import Rectangle from '../rectangle/rectangle';
 import { GraphicObjectState } from '../../../recoil/atoms';
 

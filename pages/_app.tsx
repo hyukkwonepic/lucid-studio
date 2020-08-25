@@ -2,7 +2,7 @@ import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../theme';
 import { GlobalStyle } from '../global-style';
-import { RecoilRoot } from '../services/recoil-unstable';
+import { RecoilRoot } from 'recoil';
 
 export default class MyApp extends App {
   render() {

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Styled } from './layers-view.styles';
 import { useEditor } from '../../../hooks/useEditor';
 import { usePage } from '../../../hooks/usePage';
-import { RecoilState, useRecoilState } from '../../../services/recoil-unstable';
+import { RecoilState, useRecoilState } from 'recoil';
 import { GraphicObjectState } from '../../../recoil/atoms';
 
 const Layer: FC<{ graphicObjectState: RecoilState<GraphicObjectState> }> = ({ graphicObjectState }) => {
