@@ -7,6 +7,7 @@ import { Styled } from './rectangle-layer.styles.';
 import { undefinedState } from '../../../recoil/atoms';
 import { Tools } from '../../../enums';
 import { RecoilState } from 'recoil';
+import { createRandomHexColor, createRandomGreyHexColor } from '../../../services/random-color/random-color';
 
 const isAnyDraggedDistanceExceeds5px = (
   originalCoordinate: { x: number; y: number },
@@ -91,6 +92,7 @@ const RectangleLayer = () => {
       return;
     }
 
+
     if (isAnyDraggedDistanceExceeds5px(state.coordinate, mouseCoordinate)) {
       const { x, y, width, height } = getRectangleProperty(state.coordinate, mouseCoordinate);
       const rectangleState = rectangleStateFamily({
@@ -99,7 +101,7 @@ const RectangleLayer = () => {
         width,
         height,
         angle: 0,
-        fill: '#ffffff',
+        fill: createRandomGreyHexColor(),
       });
       setTargetRectangleState(rectangleState);
       page.addChild(rectangleState);
@@ -116,7 +118,7 @@ const RectangleLayer = () => {
         width: 100,
         height: 100,
         angle: 0,
-        fill: '#ffffff',
+        fill: createRandomGreyHexColor(),
       });
       page.addChild(rectangleState);
       page.selectSingleGraphicObject(rectangleState);

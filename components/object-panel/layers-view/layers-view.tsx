@@ -31,9 +31,12 @@ const LayersView: FC = () => {
   return (
     <Styled.LayersView>
       <Styled.Content>
-        {page.children.map((graphicObject) => {
-          return <Layer key={graphicObject.key} graphicObjectState={graphicObject} />;
-        })}
+        {page.children
+          .slice()
+          .reverse()
+          .map((graphicObject) => {
+            return <Layer key={graphicObject.key} graphicObjectState={graphicObject} />;
+          })}
       </Styled.Content>
     </Styled.LayersView>
   );
