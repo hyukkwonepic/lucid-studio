@@ -69,7 +69,8 @@ const Rectangle: FC<{
     });
   };
 
-  const handleMouseOver = () => {
+  const handleMouseOver = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+    event.stopPropagation();
     page.hoverGraphicObject(rectangleState);
   };
 

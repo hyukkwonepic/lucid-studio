@@ -1,6 +1,6 @@
-import { useEditor } from '../../../../../../hooks/useEditor';
-import { usePage } from '../../../../../../hooks/usePage';
-import { useRectangle, RectangleState } from '../../../../../../hooks/useRectangle';
+import { useEditor } from '../../../../../hooks/useEditor';
+import { usePage } from '../../../../../hooks/usePage';
+import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
 import { useState, useEffect, FC, MouseEvent } from 'react';
 import { RecoilState } from 'recoil';
 

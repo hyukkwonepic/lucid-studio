@@ -1,10 +1,10 @@
-import { useEditor } from '../../../../../../hooks/useEditor';
-import { usePage } from '../../../../../../hooks/usePage';
-import { useRectangle, RectangleState } from '../../../../../../hooks/useRectangle';
+import { useEditor } from '../../../../../hooks/useEditor';
+import { usePage } from '../../../../../hooks/usePage';
+import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
 import { useState, useEffect, FC, MouseEvent } from 'react';
 import { RecoilState } from 'recoil';
 
-const BorderBottom: FC<{
+const BorderTop: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -25,11 +25,13 @@ const BorderBottom: FC<{
       const rect = page.ref.current.getBoundingClientRect();
       const y = event.clientY - rect.top;
 
-      const newHeight = y - rectangle.y;
+      const newHeight = state.rectangle.height + state.rectangle.y - y;
 
       if (newHeight > 0) {
+        rectangle.moveTo(rectangle.x, y);
         rectangle.resize(rectangle.width, newHeight);
       } else {
+        rectangle.moveTo(rectangle.x, state.rectangle.y + state.rectangle.height - 1);
         rectangle.resize(rectangle.width, 1);
       }
     };
@@ -74,8 +76,8 @@ const BorderBottom: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x - 2,
-        top: rectangle.y + rectangle.height,
+        left: rectangle.x,
+        top: rectangle.y - 2,
         width: rectangle.width + 2,
         height: '2px',
         backgroundColor: '#51BC95',
@@ -86,4 +88,4 @@ const BorderBottom: FC<{
   );
 };
 
-export default BorderBottom;
+export default BorderTop;

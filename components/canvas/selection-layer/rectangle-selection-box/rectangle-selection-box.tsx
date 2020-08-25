@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { RectangleState } from '../../../../hooks/useRectangle';
 import { RecoilState } from 'recoil';
-import { RectangleState } from '../../../../../hooks/useRectangle';
 import BorderTop from './border-top/border-top';
 import BorderRight from './border-right/border-right';
 import BorderBottom from './border-bottom/border-bottom';
