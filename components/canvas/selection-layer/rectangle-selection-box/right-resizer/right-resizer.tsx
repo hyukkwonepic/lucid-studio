@@ -4,7 +4,7 @@ import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle'
 import { useState, useEffect, FC, MouseEvent } from 'react';
 import { RecoilState } from 'recoil';
 
-const BorderBottom: FC<{
+const RightResizer: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -23,14 +23,14 @@ const BorderBottom: FC<{
   useEffect(() => {
     const handleMouseMove = (event: globalThis.MouseEvent) => {
       const rect = page.ref.current.getBoundingClientRect();
-      const y = event.clientY - rect.top;
+      const x = event.clientX - rect.left;
 
-      const newHeight = y - rectangle.y;
+      const newWidth = x - rectangle.x;
 
-      if (newHeight > 0) {
-        rectangle.resize(rectangle.width, newHeight);
+      if (newWidth > 1) {
+        rectangle.resize(newWidth, rectangle.height);
       } else {
-        rectangle.resize(rectangle.width, 1);
+        rectangle.resize(1, rectangle.height);
       }
     };
 
@@ -74,16 +74,16 @@ const BorderBottom: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x,
-        top: rectangle.y + rectangle.height - 1,
-        width: rectangle.width,
-        height: '2px',
+        left: rectangle.x + rectangle.width - 1,
+        top: rectangle.y,
+        width: '2px',
+        height: rectangle.height,
         backgroundColor: '#51BC95',
-        cursor: 'ns-resize',
+        cursor: 'ew-resize',
       }}
       onMouseDown={handleMouseDown}
     />
   );
 };
 
-export default BorderBottom;
+export default RightResizer;
