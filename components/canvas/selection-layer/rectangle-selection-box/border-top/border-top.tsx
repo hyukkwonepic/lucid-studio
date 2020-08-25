@@ -77,8 +77,8 @@ const BorderTop: FC<{
       style={{
         position: 'absolute',
         left: rectangle.x,
-        top: rectangle.y - 2,
-        width: rectangle.width + 2,
+        top: rectangle.y - 1,
+        width: rectangle.width,
         height: '2px',
         backgroundColor: '#51BC95',
         cursor: 'ns-resize',

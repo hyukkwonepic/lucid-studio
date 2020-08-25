@@ -74,9 +74,9 @@ const BorderBottom: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x - 2,
-        top: rectangle.y + rectangle.height,
-        width: rectangle.width + 2,
+        left: rectangle.x,
+        top: rectangle.y + rectangle.height - 1,
+        width: rectangle.width,
         height: '2px',
         backgroundColor: '#51BC95',
         cursor: 'ns-resize',

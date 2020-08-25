@@ -74,10 +74,10 @@ const BorderRight: FC<{
     <div
       style={{
         position: 'absolute',
-        left: rectangle.x + rectangle.width,
+        left: rectangle.x + rectangle.width - 1,
         top: rectangle.y,
         width: '2px',
-        height: rectangle.height + 2,
+        height: rectangle.height,
         backgroundColor: '#51BC95',
         cursor: 'ew-resize',
       }}
