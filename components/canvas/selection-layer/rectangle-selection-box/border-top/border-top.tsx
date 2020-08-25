@@ -2,7 +2,7 @@ import { useEditor } from '../../../../../hooks/useEditor';
 import { usePage } from '../../../../../hooks/usePage';
 import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
 import { useState, useEffect, FC, MouseEvent } from 'react';
-import { RecoilState } from '../../../../../services/recoil-unstable';
+import { RecoilState } from 'recoil';
 
 const BorderTop: FC<{
   rectangleState: RecoilState<RectangleState>;

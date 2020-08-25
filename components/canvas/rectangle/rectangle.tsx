@@ -1,4 +1,4 @@
-import { RecoilState } from '../../../services/recoil-unstable';
+import { RecoilState } from 'recoil';
 import { RectangleState, useRectangle } from '../../../hooks/useRectangle';
 import { useEditor } from '../../../hooks/useEditor';
 import { usePage } from '../../../hooks/usePage';

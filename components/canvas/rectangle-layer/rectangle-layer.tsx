@@ -5,8 +5,8 @@ import { useRectangle, rectangleStateFamily, RectangleState } from '../../../hoo
 import { useState, MouseEvent } from 'react';
 import { Styled } from './rectangle-layer.styles.';
 import { undefinedState } from '../../../recoil/atoms';
-import { RecoilState } from '../../../services/recoil-unstable';
 import { Tools } from '../../../enums';
+import { RecoilState } from 'recoil';
 
 const RectangleLayer = () => {
   const tool = useTool();
