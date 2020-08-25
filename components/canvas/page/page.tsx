@@ -4,7 +4,8 @@ import { usePage } from '../../../hooks/usePage';
 import { Styled } from './page.styles';
 import RectangleLayer from '../rectangle-layer/rectangle-layer';
 import GraphicObject from '../graphic-object/graphic-object';
-import SelectionLayer from './selection-layer/selection-layer';
+import SelectionLayer from '../selection-layer/selection-layer';
+import HoverLayer from '../hover-layer/hover-layer';
 
 const Page: FC = () => {
   const editor = useEditor();
@@ -25,6 +26,7 @@ const Page: FC = () => {
         return <GraphicObject key={graphicObject.key} graphicObjectState={graphicObject} />;
       })}
       <SelectionLayer />
+      <HoverLayer />
       <RectangleLayer />
     </Styled.Page>
   );
