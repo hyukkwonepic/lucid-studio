@@ -8,6 +8,16 @@ import { undefinedState } from '../../../recoil/atoms';
 import { Tools } from '../../../enums';
 import { RecoilState } from 'recoil';
 
+const isAnyDraggedDistanceExceeds5px = (
+  originalCoordinate: { x: number; y: number },
+  newCoordinate: {
+    x: number;
+    y: number;
+  },
+) => {
+  return newCoordinate.x >= originalCoordinate.x + 5 || newCoordinate.y >= originalCoordinate.y + 5;
+};
+
 const RectangleLayer = () => {
   const tool = useTool();
   const editor = useEditor();
@@ -81,24 +91,25 @@ const RectangleLayer = () => {
       return;
     }
 
-    const { x, y, width, height } = getRectangleProperty(state.coordinate, mouseCoordinate);
-    const rectangleState = rectangleStateFamily({
-      x,
-      y,
-      width,
-      height,
-      angle: 0,
-      fill: '#ffffff',
-    });
-    setTargetRectangleState(rectangleState);
-    page.addChild(rectangleState);
-    page.selectSingleGraphicObject(rectangleState);
+    if (isAnyDraggedDistanceExceeds5px(state.coordinate, mouseCoordinate)) {
+      const { x, y, width, height } = getRectangleProperty(state.coordinate, mouseCoordinate);
+      const rectangleState = rectangleStateFamily({
+        x,
+        y,
+        width,
+        height,
+        angle: 0,
+        fill: '#ffffff',
+      });
+      setTargetRectangleState(rectangleState);
+      page.addChild(rectangleState);
+      page.selectSingleGraphicObject(rectangleState);
+      return;
+    }
   };
 
-  const handleMouseUp = (event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
-    const { x, y } = getMouseCoordinate(event);
-
-    if (state.coordinate.x === x && state.coordinate.y === y) {
+  const handleMouseUp = () => {
+    if (!targetRectangleState) {
       const rectangleState = rectangleStateFamily({
         x: state.coordinate.x - 50,
         y: state.coordinate.y - 50,
