@@ -1,10 +1,10 @@
-import { useEditor } from '../../../../../../hooks/useEditor';
-import { usePage } from '../../../../../../hooks/usePage';
-import { useRectangle, RectangleState } from '../../../../../../hooks/useRectangle';
+import { useEditor } from '../../../../../hooks/useEditor';
+import { usePage } from '../../../../../hooks/usePage';
+import { useRectangle, RectangleState } from '../../../../../hooks/useRectangle';
 import { useState, useEffect, FC, MouseEvent } from 'react';
-import { RecoilState } from '../../../../../../services/recoil-unstable';
+import { RecoilState } from '../../../../../services/recoil-unstable';
 
-const BorderBottom: FC<{
+const BorderLeft: FC<{
   rectangleState: RecoilState<RectangleState>;
 }> = ({ rectangleState }) => {
   const editor = useEditor();
@@ -23,14 +23,17 @@ const BorderBottom: FC<{
   useEffect(() => {
     const handleMouseMove = (event: globalThis.MouseEvent) => {
       const rect = page.ref.current.getBoundingClientRect();
-      const y = event.clientY - rect.top;
 
-      const newHeight = y - rectangle.y;
+      const x = event.clientX - rect.left;
 
-      if (newHeight > 0) {
-        rectangle.resize(rectangle.width, newHeight);
+      const newWidth = state.rectangle.width + state.rectangle.x - x;
+
+      if (newWidth > 0) {
+        rectangle.moveTo(x, rectangle.y);
+        rectangle.resize(newWidth, rectangle.height);
       } else {
-        rectangle.resize(rectangle.width, 1);
+        rectangle.moveTo(state.rectangle.x + state.rectangle.width - 1, rectangle.y);
+        rectangle.resize(1, rectangle.height);
       }
     };
 
@@ -75,15 +78,15 @@ const BorderBottom: FC<{
       style={{
         position: 'absolute',
         left: rectangle.x - 2,
-        top: rectangle.y + rectangle.height,
-        width: rectangle.width + 2,
-        height: '2px',
+        top: rectangle.y - 2,
+        width: '2px',
+        height: rectangle.height + 2,
         backgroundColor: '#51BC95',
-        cursor: 'ns-resize',
+        cursor: 'ew-resize',
       }}
       onMouseDown={handleMouseDown}
     />
   );
 };
 
-export default BorderBottom;
+export default BorderLeft;

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { useEditor } from '../../../../hooks/useEditor';
-import { usePage } from '../../../../hooks/usePage';
+import { useEditor } from '../../../hooks/useEditor';
+import { usePage } from '../../../hooks/usePage';
 import RectangleSelectionBox from './rectangle-selection-box/rectangle-selection-box';
-import { useRecoilValue, RecoilState } from '../../../../services/recoil-unstable';
-import { RectangleState } from '../../../../hooks/useRectangle';
-import { GraphicObjectState } from '../../../../recoil/atoms';
+import { useRecoilValue, RecoilState } from '../../../services/recoil-unstable';
+import { RectangleState } from '../../../hooks/useRectangle';
+import { GraphicObjectState } from '../../../recoil/atoms';
 
 const GraphicObjectSelectionBox: FC<{ graphicObjectState: RecoilState<GraphicObjectState> }> = ({
   graphicObjectState,

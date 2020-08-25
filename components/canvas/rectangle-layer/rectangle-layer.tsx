@@ -1,12 +1,12 @@
-import { useTool } from '../../../../hooks/useTool';
-import { useEditor } from '../../../../hooks/useEditor';
-import { usePage } from '../../../../hooks/usePage';
-import { useRectangle, rectangleStateFamily, RectangleState } from '../../../../hooks/useRectangle';
+import { useTool } from '../../../hooks/useTool';
+import { useEditor } from '../../../hooks/useEditor';
+import { usePage } from '../../../hooks/usePage';
+import { useRectangle, rectangleStateFamily, RectangleState } from '../../../hooks/useRectangle';
 import { useState, MouseEvent } from 'react';
 import { Styled } from './rectangle-layer.styles.';
-import { undefinedState } from '../../../../recoil/atoms';
-import { RecoilState } from '../../../../services/recoil-unstable';
-import { Tools } from '../../../../enums';
+import { undefinedState } from '../../../recoil/atoms';
+import { RecoilState } from '../../../services/recoil-unstable';
+import { Tools } from '../../../enums';
 
 const RectangleLayer = () => {
   const tool = useTool();
