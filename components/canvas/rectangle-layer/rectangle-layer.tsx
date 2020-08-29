@@ -7,7 +7,7 @@ import { Styled } from './rectangle-layer.styles.';
 import { undefinedState } from '../../../recoil/atoms';
 import { Tools } from '../../../enums';
 import { RecoilState } from 'recoil';
-import { createRandomHexColor, createRandomGreyHexColor } from '../../../services/random-color/random-color';
+import { createRandomGreyHexColor } from '../../../services/random-color/random-color';
 
 const isAnyDraggedDistanceExceeds5px = (
   originalCoordinate: { x: number; y: number },
@@ -16,7 +16,7 @@ const isAnyDraggedDistanceExceeds5px = (
     y: number;
   },
 ) => {
-  return newCoordinate.x >= originalCoordinate.x + 5 || newCoordinate.y >= originalCoordinate.y + 5;
+  return Math.abs(newCoordinate.x - originalCoordinate.x) > 5 || Math.abs(newCoordinate.y - originalCoordinate.y) > 5;
 };
 
 const RectangleLayer = () => {
@@ -91,7 +91,6 @@ const RectangleLayer = () => {
       targetRectangle.resize(width, height);
       return;
     }
-
 
     if (isAnyDraggedDistanceExceeds5px(state.coordinate, mouseCoordinate)) {
       const { x, y, width, height } = getRectangleProperty(state.coordinate, mouseCoordinate);
